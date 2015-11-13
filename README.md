@@ -188,7 +188,7 @@ if __name__ == '__main__':
     getData(page)
     ```
 
-  #### 10마다 찍어내기
+#### 10초마다 찍어내기
 ```sh
 #!/usr/bin/python
 # -*- coding: utf-8 -*- 
