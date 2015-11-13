@@ -186,7 +186,7 @@ if __name__ == '__main__':
     #print page
 
     getData(page)
-    ```
+```
 
 #### 10초마다 찍어내기
 ```sh
