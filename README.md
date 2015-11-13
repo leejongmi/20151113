@@ -188,4 +188,58 @@ if __name__ == '__main__':
     getData(page)
     ```
 
-   
+  #### 10마다 찍어내기
+```sh
+#!/usr/bin/python
+# -*- coding: utf-8 -*- 
+
+import urllib2 # extensible library for opening URLs
+import time
+import json
+import requests
+
+url = 'http://www.airkorea.or.kr/index'
+url_local ="http://127.0.0.1:4242/api/put"
+
+
+
+def insert(value):
+        data={
+                "metric":"dust",
+                "timestamp":time.time(),
+                "value":value,
+                "tags":{
+                        "host":"mypc"
+                }
+        }
+        ret = requests.post(url_local, data=json.dumps(data))
+        print ret
+
+
+def getData(buffers):
+    a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
+    #print a
+
+    b = a.split('</tbody>')[0].replace('<tr>','').replace('</tr>','').replace('</td>','')
+    #print b
+
+    c = b.split('<td>')
+    print c[1]
+    print c[2]
+
+    insert(int(c[8]))
+if __name__ == '__main__':
+
+
+    while 1 :
+            t = time.localtime()
+            tsec = t.tm_sec
+
+            if tsec%10!=0 :
+                    print tsec
+                    time.sleep(1)
+            else :
+                    page = urllib2.urlopen(url).read()
+                    getData(page)
+                    #print page
+```
